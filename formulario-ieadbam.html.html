@@ -10,9 +10,9 @@
     />
     <style>
       :root {
-        --primary: #076800;
+        --primary: #007c11;
         --primary-light: #6b8cbe;
-        --primary-dark: #076800;
+        --primary-dark: #007c11;
         --accent: #ff6b6b;
         --light: #f8f9fa;
         --dark: #343a40;
@@ -215,15 +215,47 @@
       <div class="form-container">
         <h2 class="form-title">Formulário de Pesquisa</h2>
 
-        <form id="church-form">
+        <!-- FORMULÁRIO COM FORMSUBMIT INTEGRADO -->
+        <form
+          id="church-form"
+          action="https://formsubmit.co/ieadbamtefe@gmail.com"
+          method="POST"
+        >
+          <!-- Campos ocultos do FormSubmit -->
+          <input
+            type="hidden"
+            name="_subject"
+            value="Novo formulário IEADBAM"
+          />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input
+            type="hidden"
+            name="_next"
+            value="https://example.com/obrigado.html"
+          />
+          <!-- Altere para sua URL -->
+
           <div class="form-group">
             <label for="firstName">Nome</label>
-            <input type="text" id="firstName" class="form-control" required />
+            <input
+              type="text"
+              id="firstName"
+              name="Nome"
+              class="form-control"
+              required
+            />
           </div>
 
           <div class="form-group">
             <label for="lastName">Sobrenome</label>
-            <input type="text" id="lastName" class="form-control" required />
+            <input
+              type="text"
+              id="lastName"
+              name="Sobrenome"
+              class="form-control"
+              required
+            />
           </div>
 
           <div class="form-group">
@@ -231,6 +263,7 @@
             <input
               type="number"
               id="age"
+              name="Idade"
               class="form-control"
               min="1"
               max="120"
@@ -245,23 +278,18 @@
                 <input
                   type="radio"
                   id="male"
-                  name="gender"
+                  name="Sexo"
                   value="masculino"
                   required
                 />
                 <label for="male">Masculino</label>
               </div>
               <div class="radio-option">
-                <input
-                  type="radio"
-                  id="female"
-                  name="gender"
-                  value="feminino"
-                />
+                <input type="radio" id="female" name="Sexo" value="feminino" />
                 <label for="female">Feminino</label>
               </div>
               <div class="radio-option">
-                <input type="radio" id="other" name="gender" value="outro" />
+                <input type="radio" id="other" name="Sexo" value="outro" />
                 <label for="other">Outro</label>
               </div>
             </div>
@@ -277,7 +305,7 @@
                 <input
                   type="radio"
                   id="english-yes"
-                  name="english"
+                  name="Curso de Inglês"
                   value="sim"
                   required
                 />
@@ -287,7 +315,7 @@
                 <input
                   type="radio"
                   id="english-no"
-                  name="english"
+                  name="Curso de Inglês"
                   value="não"
                 />
                 <label for="english-no">Não</label>
@@ -305,7 +333,7 @@
                 <input
                   type="radio"
                   id="concurso-yes"
-                  name="concurso"
+                  name="Concurso Público"
                   value="sim"
                   required
                 />
@@ -315,7 +343,7 @@
                 <input
                   type="radio"
                   id="concurso-no"
-                  name="concurso"
+                  name="Concurso Público"
                   value="não"
                 />
                 <label for="concurso-no">Não</label>
@@ -325,7 +353,12 @@
 
           <div id="concurso-field" class="form-group conditional-field">
             <label for="funcao">Para qual função?</label>
-            <input type="text" id="funcao" class="form-control" />
+            <input
+              type="text"
+              id="funcao"
+              name="Função no Concurso"
+              class="form-control"
+            />
           </div>
 
           <div class="form-group">
@@ -338,14 +371,19 @@
                 <input
                   type="radio"
                   id="sopro-yes"
-                  name="sopro"
+                  name="Aulas de Sopro"
                   value="sim"
                   required
                 />
                 <label for="sopro-yes">Sim</label>
               </div>
               <div class="radio-option">
-                <input type="radio" id="sopro-no" name="sopro" value="não" />
+                <input
+                  type="radio"
+                  id="sopro-no"
+                  name="Aulas de Sopro"
+                  value="não"
+                />
                 <label for="sopro-no">Não</label>
               </div>
             </div>
@@ -358,6 +396,7 @@
             <input
               type="text"
               id="preferencia"
+              name="Preferência"
               class="form-control"
               placeholder="Ex: Cinema, esportes, jogos..."
               required
@@ -382,81 +421,22 @@
 
     <script>
       // Mostrar campo condicional para concurso público
-      document.querySelectorAll('input[name="concurso"]').forEach((radio) => {
-        radio.addEventListener("change", function () {
-          const concursoField = document.getElementById("concurso-field");
-          if (this.value === "sim" && this.checked) {
-            concursoField.style.display = "block";
-            document.getElementById("funcao").setAttribute("required", "true");
-          } else {
-            concursoField.style.display = "none";
-            document.getElementById("funcao").removeAttribute("required");
-          }
-        });
-      });
-
-      // Envio do formulário
       document
-        .getElementById("church-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          // Coletar dados do formulário
-          const formData = {
-            firstName: document.getElementById("firstName").value,
-            lastName: document.getElementById("lastName").value,
-            age: document.getElementById("age").value,
-            gender: document.querySelector('input[name="gender"]:checked')
-              .value,
-            english: document.querySelector('input[name="english"]:checked')
-              .value,
-            concurso: document.querySelector('input[name="concurso"]:checked')
-              .value,
-            funcao: document.getElementById("funcao").value || "Não informado",
-            sopro: document.querySelector('input[name="sopro"]:checked').value,
-            preferencia: document.getElementById("preferencia").value,
-          };
-
-          // Enviar por email (simulação)
-          sendEmail(formData);
-
-          // Mostrar mensagem de agradecimento
-          document.getElementById("church-form").style.display = "none";
-          document.getElementById("thank-you").style.display = "block";
-
-          // Rolar para a mensagem de agradecimento
-          document
-            .getElementById("thank-you")
-            .scrollIntoView({ behavior: "smooth" });
+        .querySelectorAll('input[name="Concurso Público"]')
+        .forEach((radio) => {
+          radio.addEventListener("change", function () {
+            const concursoField = document.getElementById("concurso-field");
+            if (this.value === "sim" && this.checked) {
+              concursoField.style.display = "block";
+              document
+                .getElementById("funcao")
+                .setAttribute("required", "true");
+            } else {
+              concursoField.style.display = "none";
+              document.getElementById("funcao").removeAttribute("required");
+            }
+          });
         });
-
-      // Função para enviar email (simulada)
-      function sendEmail(data) {
-        const emailBody = `
-                Nova resposta do formulário IEADBAM Tefé:
-                
-                Nome: ${data.firstName} ${data.lastName}
-                Idade: ${data.age}
-                Sexo: ${data.gender}
-                
-                Curso de inglês: ${data.english}
-                Concurso público: ${data.concurso}
-                ${data.concurso === "sim" ? "Função: " + data.funcao : ""}
-                Instrumentos de sopro: ${data.sopro}
-                Preferência: ${data.preferencia}
-                
-                Enviado em: ${new Date().toLocaleString()}
-            `;
-
-        // Em um cenário real, você usaria um serviço de email ou um backend
-        // Para demonstração, apenas logamos os dados
-        console.log("Dados do formulário:", data);
-        console.log("Email para: ieadbamtefe@gmail.com");
-        console.log("Conteúdo:", emailBody);
-
-        // Em produção, você pode usar EmailJS ou um backend para enviar o email
-        // alert("Dados coletados com sucesso! Em um sistema real, seriam enviados para ieadbamtefe@gmail.com");
-      }
 
       // Validação de idade
       document.getElementById("age").addEventListener("input", function () {
