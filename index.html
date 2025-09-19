@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário IEADBAM Tefé - AM</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #076800;
+        --primary-light: #6b8cbe;
+        --primary-dark: #076800;
+        --accent: #ff6b6b;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --success: #28a745;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: var(--dark);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 800px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin: 20px 0;
+      }
+
+      header {
+        background: var(--primary);
+        color: white;
+        padding: 25px;
+        text-align: center;
+      }
+
+      .church-name {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+        font-weight: 700;
+      }
+
+      .church-location {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .form-container {
+        padding: 30px;
+      }
+
+      .form-title {
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--primary-dark);
+        font-size: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid var(--light-gray);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .radio-option input {
+        width: 18px;
+        height: 18px;
+      }
+
+      .conditional-field {
+        display: none;
+        margin-top: 15px;
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 30px;
+      }
+
+      .btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .thank-you-message {
+        text-align: center;
+        padding: 40px;
+        display: none;
+      }
+
+      .thank-you-message i {
+        font-size: 4rem;
+        color: var(--success);
+        margin-bottom: 20px;
+      }
+
+      .thank-you-message h2 {
+        color: var(--success);
+        margin-bottom: 15px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: var(--gray);
+        font-size: 0.9rem;
+        background: var(--light-gray);
+        width: 100%;
+        max-width: 800px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          margin: 10px;
+        }
+
+        .form-container {
+          padding: 20px;
+        }
+
+        .radio-group {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="church-name">IEADBAM</div>
+        <div class="church-location">Tefé - AM</div>
+      </header>
+
+      <div class="form-container">
+        <h2 class="form-title">Formulário de Pesquisa</h2>
+
+        <form id="church-form">
+          <div class="form-group">
+            <label for="firstName">Nome</label>
+            <input type="text" id="firstName" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Sobrenome</label>
+            <input type="text" id="lastName" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="age">Idade</label>
+            <input
+              type="number"
+              id="age"
+              class="form-control"
+              min="1"
+              max="120"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Sexo</label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="masculino"
+                  required
+                />
+                <label for="male">Masculino</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="feminino"
+                />
+                <label for="female">Feminino</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="other" name="gender" value="outro" />
+                <label for="other">Outro</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label
+              >Você gostaria de realizar um curso de inglês
+              (Conversação)?</label
+            >
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="english-yes"
+                  name="english"
+                  value="sim"
+                  required
+                />
+                <label for="english-yes">Sim</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="english-no"
+                  name="english"
+                  value="não"
+                />
+                <label for="english-no">Não</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label
+              >Você vai realizar o concurso público da prefeitura de
+              Tefé?</label
+            >
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="concurso-yes"
+                  name="concurso"
+                  value="sim"
+                  required
+                />
+                <label for="concurso-yes">Sim</label>
+              </div>
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="concurso-no"
+                  name="concurso"
+                  value="não"
+                />
+                <label for="concurso-no">Não</label>
+              </div>
+            </div>
+          </div>
+
+          <div id="concurso-field" class="form-group conditional-field">
+            <label for="funcao">Para qual função?</label>
+            <input type="text" id="funcao" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label
+              >Você tem interesse em fazer aulas de instrumentos de
+              sopro?</label
+            >
+            <div class="radio-group">
+              <div class="radio-option">
+                <input
+                  type="radio"
+                  id="sopro-yes"
+                  name="sopro"
+                  value="sim"
+                  required
+                />
+                <label for="sopro-yes">Sim</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="sopro-no" name="sopro" value="não" />
+                <label for="sopro-no">Não</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="preferencia"
+              >Você prefere cinema, esportes ou jogos eletrônicos?</label
+            >
+            <input
+              type="text"
+              id="preferencia"
+              class="form-control"
+              placeholder="Ex: Cinema, esportes, jogos..."
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn">Enviar Respostas</button>
+        </form>
+
+        <div id="thank-you" class="thank-you-message">
+          <i class="fas fa-check-circle"></i>
+          <h2>Obrigado pela resposta!</h2>
+          <p>Em breve entraremos em contato.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>IEADBAM Tefé - AM &copy; 2023 - Todos os direitos reservados</p>
+      <p>Email: ieadbamtefe@gmail.com</p>
+    </footer>
+
+    <script>
+      // Mostrar campo condicional para concurso público
+      document.querySelectorAll('input[name="concurso"]').forEach((radio) => {
+        radio.addEventListener("change", function () {
+          const concursoField = document.getElementById("concurso-field");
+          if (this.value === "sim" && this.checked) {
+            concursoField.style.display = "block";
+            document.getElementById("funcao").setAttribute("required", "true");
+          } else {
+            concursoField.style.display = "none";
+            document.getElementById("funcao").removeAttribute("required");
+          }
+        });
+      });
+
+      // Envio do formulário
+      document
+        .getElementById("church-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Coletar dados do formulário
+          const formData = {
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            age: document.getElementById("age").value,
+            gender: document.querySelector('input[name="gender"]:checked')
+              .value,
+            english: document.querySelector('input[name="english"]:checked')
+              .value,
+            concurso: document.querySelector('input[name="concurso"]:checked')
+              .value,
+            funcao: document.getElementById("funcao").value || "Não informado",
+            sopro: document.querySelector('input[name="sopro"]:checked').value,
+            preferencia: document.getElementById("preferencia").value,
+          };
+
+          // Enviar por email (simulação)
+          sendEmail(formData);
+
+          // Mostrar mensagem de agradecimento
+          document.getElementById("church-form").style.display = "none";
+          document.getElementById("thank-you").style.display = "block";
+
+          // Rolar para a mensagem de agradecimento
+          document
+            .getElementById("thank-you")
+            .scrollIntoView({ behavior: "smooth" });
+        });
+
+      // Função para enviar email (simulada)
+      function sendEmail(data) {
+        const emailBody = `
+                Nova resposta do formulário IEADBAM Tefé:
+                
+                Nome: ${data.firstName} ${data.lastName}
+                Idade: ${data.age}
+                Sexo: ${data.gender}
+                
+                Curso de inglês: ${data.english}
+                Concurso público: ${data.concurso}
+                ${data.concurso === "sim" ? "Função: " + data.funcao : ""}
+                Instrumentos de sopro: ${data.sopro}
+                Preferência: ${data.preferencia}
+                
+                Enviado em: ${new Date().toLocaleString()}
+            `;
+
+        // Em um cenário real, você usaria um serviço de email ou um backend
+        // Para demonstração, apenas logamos os dados
+        console.log("Dados do formulário:", data);
+        console.log("Email para: ieadbamtefe@gmail.com");
+        console.log("Conteúdo:", emailBody);
+
+        // Em produção, você pode usar EmailJS ou um backend para enviar o email
+        // alert("Dados coletados com sucesso! Em um sistema real, seriam enviados para ieadbamtefe@gmail.com");
+      }
+
+      // Validação de idade
+      document.getElementById("age").addEventListener("input", function () {
+        if (this.value < 1) this.value = 1;
+        if (this.value > 120) this.value = 120;
+      });
+    </script>
+  </body>
+</html>
